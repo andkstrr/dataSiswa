@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $detail = null;
@@ -14,9 +15,9 @@ if (isset($_GET['id'])) {
         header("Location: index.php");
         exit;
     }
-}   else {
-        header("Location: index.php");
-        exit;
+} else {
+    header("Location: index.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
