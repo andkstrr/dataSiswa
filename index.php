@@ -2,7 +2,7 @@
 session_start();
 $buttonPrint = null;
 $buttonHapus = null;
-$dataAwal = false; // Inisialisasi di luar blok if
+$dataAwal = false;
 
 if (isset($_POST['btn'])) {
     $nama = $_POST['nama'];
