@@ -6,7 +6,7 @@ session_start();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Siswa</title>
+<title>Print Data Siswa</title>
 <!-- Link to Bootstrap CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -29,6 +29,7 @@ session_start();
                 foreach($_SESSION["data_siswa"] as $key => $data) : ?>
                     <tr>
                         <td><?= $i++; ?></td>
+                        <!-- Menampilkan data -->
                         <td><?= htmlspecialchars($data['nama']); ?></td>
                         <td><?= htmlspecialchars($data['nis']); ?></td>
                         <td><?= htmlspecialchars($data['rayon']); ?></td>
@@ -38,6 +39,7 @@ session_start();
         </tbody>
     </table>
     <script>
+        // script untuk mencetak menjadi pdf
         window.onload = function () {
             window.print();
         }

@@ -5,13 +5,19 @@ $buttonHapus = null;
 $dataAwal = false;
 
 if (isset($_POST['btn'])) {
+    # Mengambil data pada form
     $nama = $_POST['nama'];
     $nis = $_POST['nis'];
     $rayon = $_POST['rayon'];
 
     if (isset($_SESSION['data_siswa'])) {
         foreach ($_SESSION['data_siswa'] as $data) {
-            if ($data['nis'] == $nis) {
+            # Pengkondisian apabila ada nama dan nis yang sama
+            if ($data['nama'] == $nama) { 
+                $dataAwal = true;
+                break;
+            }
+            if ($data['nis'] == $nis) { 
                 $dataAwal = true;
                 break;
             }
@@ -19,6 +25,7 @@ if (isset($_POST['btn'])) {
     }
 
     if (!$dataAwal) {
+        # Menambahkan data ke dalam form    
         $_SESSION['data_siswa'][] = [
             "nama" => $nama,
             "nis" => $nis,
@@ -31,6 +38,7 @@ if (isset($_POST['btn'])) {
 }
 
 if (isset($_SESSION['data_siswa']) && !empty($_SESSION['data_siswa'])) {
+    # Menampilkan buttonPrint dan buttonHapus jika data berhasil ditambahkan
     $buttonPrint = '<a href="print.php" class="btn btn-success mt-3"><i class="fa-solid fa-print"></i> Cetak</a>';
     $buttonHapus = ' <a href="hapusAll.php" class="btn btn-danger mt-3"><i class="fa-solid fa-trash"></i> Hapus</a>';
 }
@@ -71,11 +79,13 @@ if (isset($_SESSION['data_siswa']) && !empty($_SESSION['data_siswa'])) {
     <?php
     if (isset($_POST['btn'])) {
         if ($dataAwal) {
+            # Alert apabila terdapat data yang sama
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Data sudah ada!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
         } else {
+            # Alert jika data berhasil ditambahkan
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Data berhasil ditambahkan!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -101,6 +111,7 @@ if (isset($_SESSION['data_siswa']) && !empty($_SESSION['data_siswa'])) {
                 foreach($_SESSION["data_siswa"] as $key => $data) : ?>
                     <tr>
                         <td><?= $i++ ?></td>
+                        <!-- Menampilkan data pada form -->
                         <td><?= htmlspecialchars($data['nama']); ?></td>
                         <td><?= htmlspecialchars($data['nis']); ?></td>
                         <td><?= htmlspecialchars($data['rayon']); ?></td>

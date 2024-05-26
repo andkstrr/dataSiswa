@@ -3,17 +3,20 @@ session_start();
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $detail = null;
+
     if (isset($_SESSION['data_siswa'][$id])) {
+        # Mengambil data siswa
         $detail = $_SESSION['data_siswa'][$id];
     }
 
+    # Pengkondisian jika tidak ditemukan, maka akan kembali ke index.php
     if ($detail == null) {
         header("Location: index.php");
         exit;
     }
-} else {
-    header("Location: index.php");
-    exit;
+}   else {
+        header("Location: index.php");
+        exit;
 }
 ?>
 <!DOCTYPE html>
@@ -31,6 +34,7 @@ if (isset($_GET['id'])) {
     <form action="updateData.php" method="POST">
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <div class="row g-3">
+            <!-- Memunculkan nama, nis dan rayon yang akan di edit -->
             <div class="col-md-4">
                 <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($detail['nama']); ?>" required>
             </div>
@@ -41,6 +45,7 @@ if (isset($_GET['id'])) {
                 <input type="text" name="rayon" class="form-control" value="<?= htmlspecialchars($detail['rayon']); ?>" required>
             </div>
         </div>
+        <!-- Tombol untuk mengubah data nilai -->
         <button type="submit" name="btn_update" class="btn btn-primary mt-3"><i class="fas fa-edit"></i> Edit</button>
         <a href="index.php" class="btn btn-danger mt-3"><i class="fas fa-times"></i> Batal</a>
     </form>
